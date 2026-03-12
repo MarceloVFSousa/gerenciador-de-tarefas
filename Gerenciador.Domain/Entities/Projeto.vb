@@ -5,7 +5,7 @@
         Public Property Id As Integer
         Public Property Nome As String
         Public Property Descricao As String
-        Public Property DataCriacao As DateTime
+        Public Property DataCriacao As DateTime     'Teste
 
     End Class
 
