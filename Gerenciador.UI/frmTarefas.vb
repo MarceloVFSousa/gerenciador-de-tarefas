@@ -77,24 +77,6 @@ Public Class frmTarefas
                 Return
             End If
 
-        Catch ex As Exception
-
-            MessageBox.Show("Erro ao salvar tarefa: " & ex.Message)
-
-        End Try
-
-        Try
-
-            If txtTitulo.Text.Trim() = "" Then
-
-                MessageBox.Show("Informe o título da tarefa.")
-                Return
-
-            End If
-
-
-            'Salva as alterações
-
             Dim tarefa As New Tarefa()
 
             tarefa.ProjetoId = ProjetoId
@@ -162,30 +144,32 @@ Public Class frmTarefas
     'Formata as celulas da tabela das tarefas
     Private Sub dgvTarefas_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvTarefas.CellFormatting
 
-        If dgvTarefas.Rows(e.RowIndex).DataBoundItem Is Nothing Then Exit Sub
+        If e.RowIndex < 0 Then Exit Sub
 
-        Dim row As DataGridViewRow = dgvTarefas.Rows(e.RowIndex)
+        Dim status As String = dgvTarefas.Rows(e.RowIndex).Cells("Status").Value.ToString()
+        Dim prioridade As String = dgvTarefas.Rows(e.RowIndex).Cells("Prioridade").Value.ToString()
 
-        Dim status As String = row.Cells("Status").Value.ToString()
-        Dim prioridade As String = row.Cells("Prioridade").Value.ToString()
+        'cor padrão
+        e.CellStyle.BackColor = Color.White
+        e.CellStyle.ForeColor = Color.Black
 
-        'Mantém os status de Concluído sempre verde
+        'Concluída sempre verde
         If status = "Concluída" Then
 
-            row.DefaultCellStyle.BackColor = Color.LightGreen
+            e.CellStyle.BackColor = Color.LightGreen
 
         Else
 
             Select Case prioridade
 
                 Case "Alta"
-                    row.DefaultCellStyle.BackColor = Color.LightCoral
+                    e.CellStyle.BackColor = Color.LightCoral
 
                 Case "Média"
-                    row.DefaultCellStyle.BackColor = Color.Khaki
+                    e.CellStyle.BackColor = Color.Orange
 
                 Case "Baixa"
-                    row.DefaultCellStyle.BackColor = Color.LightGreen
+                    e.CellStyle.BackColor = Color.Khaki
 
             End Select
 

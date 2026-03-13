@@ -7,7 +7,8 @@ Public Class TarefaRepository
 
         Using conn = DbConnectionFactory.CreateConnection()
 
-            Dim sql As String = "SELECT * FROM Tarefa WHERE ProjetoId = @ProjetoId ORDER BY CASE WHEN Status = 'Concluído' THEN 2 ELSE 1 END, CASE Prioridade WHEN 'Alta' THEN 1 WHEN 'Média' THEN 2 WHEN 'Baixa' THEN 3 END"
+            Dim sql As String = "INSERT INTO Tarefa (ProjetoId, Titulo, Descricao, Status, Prioridade, DataCriacao) " &
+                                "VALUES (@ProjetoId, @Titulo, @Descricao, @Status, @Prioridade, GETDATE())"
 
             Using cmd As New SqlCommand(sql, conn)
 
@@ -31,33 +32,34 @@ Public Class TarefaRepository
 
         Using conn = DbConnectionFactory.CreateConnection()
 
-            Dim sql As String = "SELECT * FROM Tarefa WHERE ProjetoId = @ProjetoId ORDER BY CASE Prioridade WHEN 'Alta' THEN 1 WHEN 'Média' THEN 2 WHEN 'Baixa' THEN 3 END, DataCriacao DESC"
 
-            Using cmd As New SqlClient.SqlCommand(sql, conn)
+            Dim sql As String = "SELECT * FROM Tarefa WHERE ProjetoId = @ProjetoId ORDER BY CASE WHEN Status = 'Concluída' THEN 4 WHEN Prioridade = 'Alta' THEN 1 WHEN Prioridade = 'Média' THEN 2 WHEN Prioridade = 'Baixa' THEN 3 END, DataCriacao DESC"
 
-                cmd.Parameters.AddWithValue("@ProjetoId", projetoId)
+                    Using cmd As New SqlClient.SqlCommand(sql, conn)
 
-                Using reader = cmd.ExecuteReader()
+                        cmd.Parameters.AddWithValue("@ProjetoId", projetoId)
 
-                    While reader.Read()
+                        Using reader = cmd.ExecuteReader()
 
-                        Dim tarefa As New Tarefa()
+                            While reader.Read()
 
-                        tarefa.Id = Convert.ToInt32(reader("Id"))
-                        tarefa.ProjetoId = Convert.ToInt32(reader("ProjetoId"))
-                        tarefa.Titulo = reader("Titulo").ToString()
-                        tarefa.Descricao = reader("Descricao").ToString()
-                        tarefa.Status = reader("Status").ToString()
-                        tarefa.Prioridade = reader("Prioridade").ToString()
-                        tarefa.DataCriacao = Convert.ToDateTime(reader("DataCriacao"))
+                                Dim tarefa As New Tarefa()
 
-                        lista.Add(tarefa)
+                                tarefa.Id = Convert.ToInt32(reader("Id"))
+                                tarefa.ProjetoId = Convert.ToInt32(reader("ProjetoId"))
+                                tarefa.Titulo = reader("Titulo").ToString()
+                                tarefa.Descricao = reader("Descricao").ToString()
+                                tarefa.Status = reader("Status").ToString()
+                                tarefa.Prioridade = reader("Prioridade").ToString()
+                                tarefa.DataCriacao = Convert.ToDateTime(reader("DataCriacao"))
 
-                    End While
+                                lista.Add(tarefa)
 
-                End Using
+                            End While
 
-            End Using
+                        End Using
+
+                    End Using
 
         End Using
 

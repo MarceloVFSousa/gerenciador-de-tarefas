@@ -68,14 +68,20 @@ Namespace Repositories
 
             Using conn = DbConnectionFactory.CreateConnection()
 
-                Dim sql As String = "DELETE FROM Projeto WHERE Id = @Id"
+                'Primeiro remove as tarefas do projeto
+                Dim sqlTarefas As String = "DELETE FROM Tarefa WHERE ProjetoId = @ProjetoId"
 
-                Using cmd As New SqlClient.SqlCommand(sql, conn)
+                Using cmdTarefas As New SqlClient.SqlCommand(sqlTarefas, conn)
+                    cmdTarefas.Parameters.AddWithValue("@ProjetoId", id)
+                    cmdTarefas.ExecuteNonQuery()
+                End Using
 
-                    cmd.Parameters.AddWithValue("@Id", id)
+                'Depois remove o projeto
+                Dim sqlProjeto As String = "DELETE FROM Projeto WHERE Id = @Id"
 
-                    cmd.ExecuteNonQuery()
-
+                Using cmdProjeto As New SqlClient.SqlCommand(sqlProjeto, conn)
+                    cmdProjeto.Parameters.AddWithValue("@Id", id)
+                    cmdProjeto.ExecuteNonQuery()
                 End Using
 
             End Using
