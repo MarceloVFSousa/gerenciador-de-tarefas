@@ -5,7 +5,7 @@ Namespace Data
     Public Class DbConnectionFactory
 
         Private Shared ReadOnly connectionString As String =
-            "Server=localhost;Database=TaskManagerDB;Trusted_Connection=True;"
+            "Server=.\SQLEXPRESS;Database=GerenciadorDeTarefasDB;Trusted_Connection=True;"
 
         Public Shared Function CreateConnection() As SqlConnection
 

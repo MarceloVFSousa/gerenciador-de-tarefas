@@ -6,6 +6,7 @@ Namespace Repositories
 
     Public Class ProjetoRepository
 
+        'Método para inserção
         Public Sub Inserir(projeto As Projeto)
 
             Using conn = DbConnectionFactory.CreateConnection()
@@ -27,7 +28,7 @@ Namespace Repositories
 
         End Sub
 
-
+        'Método para listagem
         Public Function Listar() As List(Of Projeto)
 
             Dim lista As New List(Of Projeto)
@@ -62,6 +63,25 @@ Namespace Repositories
             Return lista
 
         End Function
+
+        'Método para exclusão
+        Public Sub Excluir(id As Integer)
+
+            Using conn = DbConnectionFactory.CreateConnection()
+
+                Dim sql As String = "DELETE FROM Projeto WHERE Id = @Id"
+
+                Using cmd As New SqlClient.SqlCommand(sql, conn)
+
+                    cmd.Parameters.AddWithValue("@Id", id)
+
+                    cmd.ExecuteNonQuery()
+
+                End Using
+
+            End Using
+
+        End Sub
 
     End Class
 
