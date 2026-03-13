@@ -1,6 +1,5 @@
 ﻿Imports System.Data.SqlClient
 Imports Gerenciador.Domain.Entities
-Imports Gerenciador.Estrutura.Data
 
 Namespace Repositories
 

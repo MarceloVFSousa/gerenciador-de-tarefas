@@ -1,21 +1,18 @@
 ﻿Imports System.Data.SqlClient
 
-Namespace Data
+Public Class DbConnectionFactory
 
-    Public Class DbConnectionFactory
+    Public Shared Function CreateConnection() As SqlConnection
 
-        Private Shared ReadOnly connectionString As String =
+        Dim connectionString As String =
             "Server=.\SQLEXPRESS;Database=GerenciadorDeTarefasDB;Trusted_Connection=True;"
 
-        Public Shared Function CreateConnection() As SqlConnection
+        Dim conn As New SqlConnection(connectionString)
 
-            Dim conn As New SqlConnection(connectionString)
-            conn.Open()
+        conn.Open()
 
-            Return conn
+        Return conn
 
-        End Function
+    End Function
 
-    End Class
-
-End Namespace
+End Class
