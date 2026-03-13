@@ -23,7 +23,7 @@ O sistema atualmente possui as seguintes funcionalidades:
 
 ---
 
-### ✅ Gerenciamento de Tarefas
+### Gerenciamento de Tarefas
 
 Cada projeto pode possuir várias tarefas associadas.
 
@@ -80,7 +80,7 @@ Isso permite visualizar rapidamente as tarefas mais importantes.
 
 ---
 
-# 🏗 Arquitetura do Projeto
+# Arquitetura do Projeto
 
 O sistema foi desenvolvido utilizando **arquitetura em camadas**, separando responsabilidades entre:
 
@@ -131,7 +131,7 @@ Principais telas:
 
 ---
 
-# 🗄 Banco de Dados
+# Banco de Dados
 
 O sistema utiliza **SQL Server** como banco de dados.
 
