@@ -5,6 +5,7 @@ Public Class frmTarefas
 
     Public Property ProjetoId As Integer
     Public Property NomeProjeto As String
+    Private tarefaSelecionadaId As Integer = 0
 
     Private tarefaService As New TarefaService()
 
@@ -109,6 +110,7 @@ Public Class frmTarefas
 
         cmbStatus.SelectedIndex = -1
         cmbPrioridade.SelectedIndex = -1
+        tarefaSelecionadaId = 0
 
     End Sub
 
@@ -226,5 +228,51 @@ Public Class frmTarefas
 
     End Sub
 
+    'Captura o clique nas células
+    Private Sub dgvTarefas_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvTarefas.CellClick
 
+        If e.RowIndex < 0 Then Exit Sub
+
+        Dim row = dgvTarefas.Rows(e.RowIndex)
+
+        tarefaSelecionadaId = Convert.ToInt32(row.Cells("Id").Value)
+
+        txtTitulo.Text = row.Cells("Titulo").Value.ToString()
+        txtDescricao.Text = row.Cells("Descricao").Value.ToString()
+        cmbStatus.Text = row.Cells("Status").Value.ToString()
+        cmbPrioridade.Text = row.Cells("Prioridade").Value.ToString()
+
+    End Sub
+
+
+    Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
+        Try
+
+            If tarefaSelecionadaId = 0 Then
+                MessageBox.Show("Selecione uma tarefa para editar.")
+                Return
+            End If
+
+            Dim tarefa As New Tarefa()
+
+            tarefa.Id = tarefaSelecionadaId
+            tarefa.ProjetoId = ProjetoId
+            tarefa.Titulo = txtTitulo.Text
+            tarefa.Descricao = txtDescricao.Text
+            tarefa.Status = cmbStatus.Text
+            tarefa.Prioridade = cmbPrioridade.Text
+
+            tarefaService.AtualizarTarefa(tarefa)
+
+            MessageBox.Show("Tarefa atualizada com sucesso!")
+
+            LimparCampos()
+            CarregarTarefas()
+
+        Catch ex As Exception
+
+            MessageBox.Show("Erro ao editar tarefa: " & ex.Message)
+
+        End Try
+    End Sub
 End Class

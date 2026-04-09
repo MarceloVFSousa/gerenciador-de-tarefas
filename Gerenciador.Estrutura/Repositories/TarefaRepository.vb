@@ -3,6 +3,7 @@ Imports Gerenciador.Domain.Entities
 
 Public Class TarefaRepository
 
+    'Método de inserção
     Public Sub Inserir(tarefa As Tarefa)
 
         Using conn = DbConnectionFactory.CreateConnection()
@@ -26,6 +27,7 @@ Public Class TarefaRepository
 
     End Sub
 
+    ' Método de listagem
     Public Function ListarPorProjeto(projetoId As Integer) As List(Of Tarefa)
 
         Dim lista As New List(Of Tarefa)
@@ -66,5 +68,29 @@ Public Class TarefaRepository
         Return lista
 
     End Function
+
+    'Método de atualização
+
+    Public Sub Atualizar(tarefa As Tarefa)
+
+        Using conn = DbConnectionFactory.CreateConnection()
+
+            Dim sql As String = "UPDATE Tarefa SET Titulo = @Titulo, Descricao = @Descricao, Status = @Status, Prioridade = @Prioridade WHERE Id = @Id"
+
+            Using cmd As New SqlCommand(sql, conn)
+
+                cmd.Parameters.AddWithValue("@Titulo", tarefa.Titulo)
+                cmd.Parameters.AddWithValue("@Descricao", tarefa.Descricao)
+                cmd.Parameters.AddWithValue("@Status", tarefa.Status)
+                cmd.Parameters.AddWithValue("@Prioridade", tarefa.Prioridade)
+                cmd.Parameters.AddWithValue("@Id", tarefa.Id)
+
+                cmd.ExecuteNonQuery()
+
+            End Using
+
+        End Using
+
+    End Sub
 
 End Class

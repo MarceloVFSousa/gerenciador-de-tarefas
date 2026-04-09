@@ -24,6 +24,7 @@ Partial Class frmTarefas
     Private Sub InitializeComponent()
         Me.btnSalvarTarefa = New System.Windows.Forms.Button()
         Me.grpCadastroTarefa = New System.Windows.Forms.GroupBox()
+        Me.btnVoltar = New System.Windows.Forms.Button()
         Me.lblProjeto = New System.Windows.Forms.Label()
         Me.cmbPrioridade = New System.Windows.Forms.ComboBox()
         Me.cmbStatus = New System.Windows.Forms.ComboBox()
@@ -39,7 +40,7 @@ Partial Class frmTarefas
         Me.lblEmAndamento = New System.Windows.Forms.Label()
         Me.lblPendentes = New System.Windows.Forms.Label()
         Me.lblTotalTarefas = New System.Windows.Forms.Label()
-        Me.btnVoltar = New System.Windows.Forms.Button()
+        Me.btnEditar = New System.Windows.Forms.Button()
         Me.grpCadastroTarefa.SuspendLayout()
         CType(Me.dgvTarefas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotalTarefas.SuspendLayout()
@@ -56,6 +57,7 @@ Partial Class frmTarefas
         '
         'grpCadastroTarefa
         '
+        Me.grpCadastroTarefa.Controls.Add(Me.btnEditar)
         Me.grpCadastroTarefa.Controls.Add(Me.btnVoltar)
         Me.grpCadastroTarefa.Controls.Add(Me.lblProjeto)
         Me.grpCadastroTarefa.Controls.Add(Me.cmbPrioridade)
@@ -69,10 +71,20 @@ Partial Class frmTarefas
         Me.grpCadastroTarefa.Controls.Add(Me.lblTitulo)
         Me.grpCadastroTarefa.Location = New System.Drawing.Point(11, 10)
         Me.grpCadastroTarefa.Name = "grpCadastroTarefa"
-        Me.grpCadastroTarefa.Size = New System.Drawing.Size(393, 321)
+        Me.grpCadastroTarefa.Size = New System.Drawing.Size(393, 329)
         Me.grpCadastroTarefa.TabIndex = 6
         Me.grpCadastroTarefa.TabStop = False
         Me.grpCadastroTarefa.Text = "Cadastro de Tarefas"
+        '
+        'btnVoltar
+        '
+        Me.btnVoltar.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnVoltar.Location = New System.Drawing.Point(255, 285)
+        Me.btnVoltar.Name = "btnVoltar"
+        Me.btnVoltar.Size = New System.Drawing.Size(75, 36)
+        Me.btnVoltar.TabIndex = 15
+        Me.btnVoltar.Text = "Voltar"
+        Me.btnVoltar.UseVisualStyleBackColor = False
         '
         'lblProjeto
         '
@@ -88,7 +100,7 @@ Partial Class frmTarefas
         '
         Me.cmbPrioridade.FormattingEnabled = True
         Me.cmbPrioridade.Items.AddRange(New Object() {"Baixa", "Média", "Alta"})
-        Me.cmbPrioridade.Location = New System.Drawing.Point(104, 264)
+        Me.cmbPrioridade.Location = New System.Drawing.Point(104, 247)
         Me.cmbPrioridade.Name = "cmbPrioridade"
         Me.cmbPrioridade.Size = New System.Drawing.Size(108, 26)
         Me.cmbPrioridade.TabIndex = 12
@@ -131,7 +143,7 @@ Partial Class frmTarefas
         '
         Me.lblPrioridade.AutoSize = True
         Me.lblPrioridade.Font = New System.Drawing.Font("Tahoma", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrioridade.Location = New System.Drawing.Point(5, 267)
+        Me.lblPrioridade.Location = New System.Drawing.Point(5, 250)
         Me.lblPrioridade.Name = "lblPrioridade"
         Me.lblPrioridade.Size = New System.Drawing.Size(84, 21)
         Me.lblPrioridade.TabIndex = 7
@@ -173,9 +185,9 @@ Partial Class frmTarefas
         Me.grpTotalTarefas.Controls.Add(Me.lblPendentes)
         Me.grpTotalTarefas.Controls.Add(Me.lblTotalTarefas)
         Me.grpTotalTarefas.Font = New System.Drawing.Font("Tahoma", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpTotalTarefas.Location = New System.Drawing.Point(11, 337)
+        Me.grpTotalTarefas.Location = New System.Drawing.Point(11, 349)
         Me.grpTotalTarefas.Name = "grpTotalTarefas"
-        Me.grpTotalTarefas.Size = New System.Drawing.Size(393, 157)
+        Me.grpTotalTarefas.Size = New System.Drawing.Size(393, 132)
         Me.grpTotalTarefas.TabIndex = 14
         Me.grpTotalTarefas.TabStop = False
         Me.grpTotalTarefas.Text = "Tarefas:"
@@ -220,15 +232,14 @@ Partial Class frmTarefas
         Me.lblTotalTarefas.TabIndex = 18
         Me.lblTotalTarefas.Text = "Total Tarefas:"
         '
-        'btnVoltar
+        'btnEditar
         '
-        Me.btnVoltar.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnVoltar.Location = New System.Drawing.Point(255, 258)
-        Me.btnVoltar.Name = "btnVoltar"
-        Me.btnVoltar.Size = New System.Drawing.Size(75, 36)
-        Me.btnVoltar.TabIndex = 15
-        Me.btnVoltar.Text = "Voltar"
-        Me.btnVoltar.UseVisualStyleBackColor = False
+        Me.btnEditar.Location = New System.Drawing.Point(255, 243)
+        Me.btnEditar.Name = "btnEditar"
+        Me.btnEditar.Size = New System.Drawing.Size(75, 36)
+        Me.btnEditar.TabIndex = 16
+        Me.btnEditar.Text = "Editar"
+        Me.btnEditar.UseVisualStyleBackColor = True
         '
         'frmTarefas
         '
@@ -267,4 +278,5 @@ Partial Class frmTarefas
     Friend WithEvents lblPendentes As System.Windows.Forms.Label
     Friend WithEvents lblTotalTarefas As System.Windows.Forms.Label
     Friend WithEvents btnVoltar As System.Windows.Forms.Button
+    Friend WithEvents btnEditar As System.Windows.Forms.Button
 End Class
