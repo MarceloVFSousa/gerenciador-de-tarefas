@@ -34,6 +34,7 @@ O sistema permite:
 * Definir descrição da tarefa
 * Definir **status**
 * Definir **prioridade**
+* Editar uma tarefa já existente
 
 ---
 
