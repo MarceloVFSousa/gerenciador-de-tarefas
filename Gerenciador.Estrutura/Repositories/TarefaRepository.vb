@@ -93,4 +93,23 @@ Public Class TarefaRepository
 
     End Sub
 
+    'Método de exclusão
+    Public Sub Excluir(id As Integer)
+
+        Using conn = DbConnectionFactory.CreateConnection()
+
+            Dim sql As String = "DELETE FROM Tarefa WHERE Id = @Id"
+
+            Using cmd As New SqlCommand(sql, conn)
+
+                cmd.Parameters.AddWithValue("@Id", id)
+
+                cmd.ExecuteNonQuery()
+
+            End Using
+
+        End Using
+
+    End Sub
+
 End Class

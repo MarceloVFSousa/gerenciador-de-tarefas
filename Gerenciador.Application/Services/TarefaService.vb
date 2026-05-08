@@ -27,4 +27,14 @@ Public Class TarefaService
 
     End Function
 
+    Public Sub ExcluirTarefa(id As Integer)
+
+        If id = 0 Then
+            Throw New Exception("Tarefa inválida")
+        End If
+
+        repository.Excluir(id)
+
+    End Sub
+
 End Class

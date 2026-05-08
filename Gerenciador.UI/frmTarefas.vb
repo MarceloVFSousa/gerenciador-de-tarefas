@@ -275,4 +275,36 @@ Public Class frmTarefas
 
         End Try
     End Sub
+
+    Private Sub btnExcluirTarefa_Click(sender As Object, e As EventArgs) Handles btnExcluirTarefa.Click
+        Try
+
+            If tarefaSelecionadaId = 0 Then
+                MessageBox.Show("Selecione uma tarefa para excluir.")
+                Return
+            End If
+
+            Dim confirmacao = MessageBox.Show(
+                "Deseja realmente excluir esta tarefa?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question)
+
+            If confirmacao = DialogResult.Yes Then
+
+                tarefaService.ExcluirTarefa(tarefaSelecionadaId)
+
+                MessageBox.Show("Tarefa excluída com sucesso!")
+
+                LimparCampos()
+                CarregarTarefas()
+
+            End If
+
+        Catch ex As Exception
+
+            MessageBox.Show("Erro ao excluir tarefa: " & ex.Message)
+
+        End Try
+    End Sub
 End Class
