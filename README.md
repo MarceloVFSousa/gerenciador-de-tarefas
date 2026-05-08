@@ -14,7 +14,9 @@ O projeto foi desenvolvido utilizando conceitos de **arquitetura em camadas**, *
 
 O sistema atualmente possui as seguintes funcionalidades:
 
-### Gerenciamento de Projetos
+---
+
+## Gerenciamento de Projetos
 
 * Criar novos projetos
 * Listar projetos cadastrados
@@ -23,7 +25,7 @@ O sistema atualmente possui as seguintes funcionalidades:
 
 ---
 
-### Gerenciamento de Tarefas
+## Gerenciamento de Tarefas
 
 Cada projeto pode possuir várias tarefas associadas.
 
@@ -35,10 +37,33 @@ O sistema permite:
 * Definir **status**
 * Definir **prioridade**
 * Editar uma tarefa já existente
+* Excluir tarefas individualmente
 
 ---
 
-### Status das tarefas
+## Filtros e Busca de Tarefas
+
+O sistema permite localizar tarefas de forma rápida através de:
+
+* Busca por texto (título da tarefa)
+* Filtro por status:
+
+  * Pendente
+  * Em andamento
+  * Concluída
+* Filtro por prioridade:
+
+  * Alta
+  * Média
+  * Baixa
+
+Os filtros podem ser **combinados**, permitindo consultas mais específicas.
+
+Também é possível **limpar os filtros** e retornar à listagem completa.
+
+---
+
+## Status das tarefas
 
 As tarefas podem possuir três status:
 
@@ -46,16 +71,18 @@ As tarefas podem possuir três status:
 * **Em andamento**
 * **Concluída**
 
-O sistema também exibe contadores automáticos de tarefas:
+O sistema exibe contadores automáticos de tarefas:
 
 * Total de tarefas
 * Tarefas pendentes
 * Tarefas em andamento
 * Tarefas concluídas
 
+Os contadores representam o **estado geral do projeto**, independentemente dos filtros aplicados.
+
 ---
 
-### Identificação visual por prioridade
+## Identificação visual por prioridade
 
 As tarefas são destacadas por cores para facilitar a visualização:
 
@@ -68,7 +95,7 @@ As tarefas são destacadas por cores para facilitar a visualização:
 
 ---
 
-### Ordenação automática de tarefas
+## Ordenação automática de tarefas
 
 As tarefas são organizadas automaticamente na tabela seguindo a seguinte prioridade:
 
@@ -79,7 +106,6 @@ As tarefas são organizadas automaticamente na tabela seguindo a seguinte priori
 
 Isso permite visualizar rapidamente as tarefas mais importantes.
 
----
 
 # Arquitetura do Projeto
 
@@ -180,18 +206,6 @@ git clone https://github.com/MarceloVFSousa/gerenciador-de-tarefas)
 4. Criar as tabelas **Projeto** e **Tarefa**
 
 5. Executar o sistema
-
----
-
-# Demonstração
-
-Durante a apresentação do projeto foi gravado um vídeo demonstrando:
-
-* criação de projetos
-* criação de tarefas
-* organização automática das tarefas
-* identificação visual por prioridade
-* exclusão de projetos
 
 ---
 
