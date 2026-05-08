@@ -42,6 +42,11 @@ Partial Class frmTarefas
         Me.lblEmAndamento = New System.Windows.Forms.Label()
         Me.lblPendentes = New System.Windows.Forms.Label()
         Me.lblTotalTarefas = New System.Windows.Forms.Label()
+        Me.txtBusca = New System.Windows.Forms.TextBox()
+        Me.cmbFiltroStatus = New System.Windows.Forms.ComboBox()
+        Me.cmbFiltroPrioridade = New System.Windows.Forms.ComboBox()
+        Me.btnFiltrar = New System.Windows.Forms.Button()
+        Me.btnLimparFiltro = New System.Windows.Forms.Button()
         Me.grpCadastroTarefa.SuspendLayout()
         CType(Me.dgvTarefas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotalTarefas.SuspendLayout()
@@ -194,10 +199,10 @@ Partial Class frmTarefas
         'dgvTarefas
         '
         Me.dgvTarefas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvTarefas.Location = New System.Drawing.Point(498, 12)
+        Me.dgvTarefas.Location = New System.Drawing.Point(498, 50)
         Me.dgvTarefas.Name = "dgvTarefas"
         Me.dgvTarefas.RowTemplate.Height = 24
-        Me.dgvTarefas.Size = New System.Drawing.Size(534, 514)
+        Me.dgvTarefas.Size = New System.Drawing.Size(577, 476)
         Me.dgvTarefas.TabIndex = 7
         '
         'grpTotalTarefas
@@ -254,11 +259,62 @@ Partial Class frmTarefas
         Me.lblTotalTarefas.TabIndex = 18
         Me.lblTotalTarefas.Text = "Total Tarefas:"
         '
+        'txtBusca
+        '
+        Me.txtBusca.Location = New System.Drawing.Point(498, 18)
+        Me.txtBusca.Multiline = True
+        Me.txtBusca.Name = "txtBusca"
+        Me.txtBusca.Size = New System.Drawing.Size(179, 26)
+        Me.txtBusca.TabIndex = 15
+        '
+        'cmbFiltroStatus
+        '
+        Me.cmbFiltroStatus.FormattingEnabled = True
+        Me.cmbFiltroStatus.Items.AddRange(New Object() {"Todos", "Pendente", "Em andamento", "Concluída"})
+        Me.cmbFiltroStatus.Location = New System.Drawing.Point(683, 18)
+        Me.cmbFiltroStatus.Name = "cmbFiltroStatus"
+        Me.cmbFiltroStatus.Size = New System.Drawing.Size(121, 26)
+        Me.cmbFiltroStatus.TabIndex = 16
+        Me.cmbFiltroStatus.Text = "Status"
+        '
+        'cmbFiltroPrioridade
+        '
+        Me.cmbFiltroPrioridade.FormattingEnabled = True
+        Me.cmbFiltroPrioridade.Items.AddRange(New Object() {"Todas", "Alta", "Média", "Baixa"})
+        Me.cmbFiltroPrioridade.Location = New System.Drawing.Point(810, 18)
+        Me.cmbFiltroPrioridade.Name = "cmbFiltroPrioridade"
+        Me.cmbFiltroPrioridade.Size = New System.Drawing.Size(121, 26)
+        Me.cmbFiltroPrioridade.TabIndex = 17
+        Me.cmbFiltroPrioridade.Text = "Prioridade"
+        '
+        'btnFiltrar
+        '
+        Me.btnFiltrar.Location = New System.Drawing.Point(937, 18)
+        Me.btnFiltrar.Name = "btnFiltrar"
+        Me.btnFiltrar.Size = New System.Drawing.Size(66, 26)
+        Me.btnFiltrar.TabIndex = 18
+        Me.btnFiltrar.Text = "Filtrar"
+        Me.btnFiltrar.UseVisualStyleBackColor = True
+        '
+        'btnLimparFiltro
+        '
+        Me.btnLimparFiltro.Location = New System.Drawing.Point(1009, 18)
+        Me.btnLimparFiltro.Name = "btnLimparFiltro"
+        Me.btnLimparFiltro.Size = New System.Drawing.Size(66, 26)
+        Me.btnLimparFiltro.TabIndex = 19
+        Me.btnLimparFiltro.Text = "Limpar"
+        Me.btnLimparFiltro.UseVisualStyleBackColor = True
+        '
         'frmTarefas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1044, 538)
+        Me.ClientSize = New System.Drawing.Size(1086, 538)
+        Me.Controls.Add(Me.btnLimparFiltro)
+        Me.Controls.Add(Me.btnFiltrar)
+        Me.Controls.Add(Me.cmbFiltroPrioridade)
+        Me.Controls.Add(Me.cmbFiltroStatus)
+        Me.Controls.Add(Me.txtBusca)
         Me.Controls.Add(Me.dgvTarefas)
         Me.Controls.Add(Me.grpTotalTarefas)
         Me.Controls.Add(Me.grpCadastroTarefa)
@@ -271,6 +327,7 @@ Partial Class frmTarefas
         Me.grpTotalTarefas.ResumeLayout(False)
         Me.grpTotalTarefas.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnSalvarTarefa As System.Windows.Forms.Button
@@ -293,4 +350,9 @@ Partial Class frmTarefas
     Friend WithEvents btnVoltar As System.Windows.Forms.Button
     Friend WithEvents btnEditar As System.Windows.Forms.Button
     Friend WithEvents btnExcluirTarefa As System.Windows.Forms.Button
+    Friend WithEvents txtBusca As System.Windows.Forms.TextBox
+    Friend WithEvents cmbFiltroStatus As System.Windows.Forms.ComboBox
+    Friend WithEvents cmbFiltroPrioridade As System.Windows.Forms.ComboBox
+    Friend WithEvents btnFiltrar As System.Windows.Forms.Button
+    Friend WithEvents btnLimparFiltro As System.Windows.Forms.Button
 End Class

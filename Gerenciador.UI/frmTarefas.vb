@@ -6,6 +6,7 @@ Public Class frmTarefas
     Public Property ProjetoId As Integer
     Public Property NomeProjeto As String
     Private tarefaSelecionadaId As Integer = 0
+    Private listaCompleta As List(Of Tarefa)
 
     Private tarefaService As New TarefaService()
 
@@ -36,6 +37,20 @@ Public Class frmTarefas
         cmbPrioridade.Items.Add("Baixa")
         cmbPrioridade.Items.Add("Média")
         cmbPrioridade.Items.Add("Alta")
+
+        cmbFiltroStatus.Items.Clear()
+        cmbFiltroStatus.Items.Add("Todos")
+        cmbFiltroStatus.Items.Add("Pendente")
+        cmbFiltroStatus.Items.Add("Em andamento")
+        cmbFiltroStatus.Items.Add("Concluída")
+        cmbFiltroStatus.SelectedIndex = 0
+
+        cmbFiltroPrioridade.Items.Clear()
+        cmbFiltroPrioridade.Items.Add("Todas")
+        cmbFiltroPrioridade.Items.Add("Alta")
+        cmbFiltroPrioridade.Items.Add("Média")
+        cmbFiltroPrioridade.Items.Add("Baixa")
+        cmbFiltroPrioridade.SelectedIndex = 0
 
     End Sub
 
@@ -119,9 +134,9 @@ Public Class frmTarefas
 
         Try
 
-            Dim lista = tarefaService.ListarPorProjeto(ProjetoId)
+            listaCompleta = tarefaService.ListarPorProjeto(ProjetoId)
 
-            dgvTarefas.DataSource = lista
+            dgvTarefas.DataSource = listaCompleta
 
             dgvTarefas.Columns("Id").Visible = False
 
@@ -182,29 +197,13 @@ Public Class frmTarefas
     'Atualiza o contador de tarefas
     Private Sub AtualizarContadores()
 
-        Dim total As Integer = dgvTarefas.Rows.Count
+        If listaCompleta Is Nothing Then Exit Sub
 
-        Dim pendentes As Integer = 0
-        Dim andamento As Integer = 0
-        Dim concluidas As Integer = 0
+        Dim total As Integer = listaCompleta.Count
 
-        For Each row As DataGridViewRow In dgvTarefas.Rows
-
-            Dim status As String = row.Cells("Status").Value.ToString()
-
-            If status = "Pendente" Then
-                pendentes += 1
-            End If
-
-            If status = "Em andamento" Then
-                andamento += 1
-            End If
-
-            If status = "Concluída" Then
-                concluidas += 1
-            End If
-
-        Next
+        Dim pendentes As Integer = listaCompleta.Where(Function(t) t.Status = "Pendente").Count()
+        Dim andamento As Integer = listaCompleta.Where(Function(t) t.Status = "Em andamento").Count()
+        Dim concluidas As Integer = listaCompleta.Where(Function(t) t.Status = "Concluída").Count()
 
         lblTotalTarefas.Text = "Total: " & total
         lblPendentes.Text = "Pendentes: " & pendentes
@@ -306,5 +305,31 @@ Public Class frmTarefas
             MessageBox.Show("Erro ao excluir tarefa: " & ex.Message)
 
         End Try
+    End Sub
+
+    Private Sub btnFiltrar_Click(sender As Object, e As EventArgs) Handles btnFiltrar.Click
+
+        Dim busca As String = txtBusca.Text
+        Dim status As String = cmbFiltroStatus.Text
+        Dim prioridade As String = cmbFiltroPrioridade.Text
+
+        Dim listaFiltrada = tarefaService.FiltrarTarefas(ProjetoId, busca, status, prioridade)
+
+        dgvTarefas.DataSource = listaFiltrada
+
+        AtualizarContadores()
+
+        dgvTarefas.ClearSelection()
+
+    End Sub
+
+    Private Sub btnLimparFiltro_Click(sender As Object, e As EventArgs) Handles btnLimparFiltro.Click
+
+        txtBusca.Clear()
+        cmbFiltroStatus.SelectedIndex = 0
+        cmbFiltroPrioridade.SelectedIndex = 0
+
+        CarregarTarefas()
+
     End Sub
 End Class

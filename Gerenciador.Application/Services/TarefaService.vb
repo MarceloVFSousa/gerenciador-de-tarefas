@@ -37,4 +37,27 @@ Public Class TarefaService
 
     End Sub
 
+    Public Function FiltrarTarefas(projetoId As Integer, busca As String, status As String, prioridade As String) As List(Of Tarefa)
+
+        Dim lista = repository.ListarPorProjeto(projetoId)
+
+        'Filtro por texto
+        If Not String.IsNullOrWhiteSpace(busca) Then
+            lista = lista.Where(Function(t) t.Titulo.ToLower().Contains(busca.ToLower())).ToList()
+        End If
+
+        'Filtro por status
+        If status <> "Todos" Then
+            lista = lista.Where(Function(t) t.Status = status).ToList()
+        End If
+
+        'Filtro por prioridade
+        If prioridade <> "Todas" Then
+            lista = lista.Where(Function(t) t.Prioridade = prioridade).ToList()
+        End If
+
+        Return lista
+
+    End Function
+
 End Class
