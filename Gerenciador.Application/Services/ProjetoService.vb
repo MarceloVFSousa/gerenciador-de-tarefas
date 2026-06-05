@@ -14,6 +14,15 @@ Namespace Services
                 Throw New Exception("O nome do projeto é obrigatório")
             End If
 
+            'Validações adicionais
+            If nome.Trim().Length < 3 Then
+                Throw New Exception("O nome do projeto deve possuir pelo menos 3 caracteres.")
+            End If
+
+            If descricao.Trim().Length < 5 Then
+                Throw New Exception("A descrição do projeto deve possuir pelo menos 5 caracteres.")
+            End If
+
             Dim projeto As New Projeto With {
                 .Nome = nome,
                 .Descricao = descricao,

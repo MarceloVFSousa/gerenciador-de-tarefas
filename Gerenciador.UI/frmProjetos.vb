@@ -90,9 +90,29 @@ Public Class frmProjetos
             Dim nome As String = txtNome.Text.Trim()
             Dim descricao As String = txtDescricao.Text.Trim()
 
+            'Validação adicional para criação de projeto
+            If nome.Length < 3 Then
+
+                MessageBox.Show(
+                    "O nome do projeto deve possuir pelo menos 3 caracteres.",
+                    "Validação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                txtNome.Focus()
+
+                Return
+
+            End If
+
             projetoService.CriarProjeto(nome, descricao)
 
-            MessageBox.Show("Projeto salvo com sucesso!")
+            MessageBox.Show(
+                "Projeto criado com sucesso!",
+                "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
 
             LimparCampos()
 
@@ -131,16 +151,24 @@ Public Class frmProjetos
             Dim id As Integer = Convert.ToInt32(dgvProjetos.SelectedRows(0).Cells("Id").Value)
 
             Dim confirmacao = MessageBox.Show(
-                "Deseja realmente excluir este projeto?",
-                "Confirmação",
-                MessageBoxButtons.YesNo
+                "Deseja realmente excluir este projeto?" & vbCrLf & vbCrLf &
+                "Todas as tarefas vinculadas a este projeto também serão removidas." & vbCrLf & vbCrLf &
+                "Esta ação não poderá ser desfeita.",
+                "Confirmação de Exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
             )
 
             If confirmacao = DialogResult.Yes Then
 
                 projetoService.ExcluirProjeto(id)
 
-                MessageBox.Show("Projeto excluído com sucesso!")
+                MessageBox.Show(
+                    "Projeto excluído com sucesso!",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                )
 
                 CarregarProjetos()
 

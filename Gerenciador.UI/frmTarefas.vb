@@ -63,6 +63,9 @@ Public Class frmTarefas
         dgvTarefas.ReadOnly = True
         dgvTarefas.AllowUserToAddRows = False
 
+        dgvTarefas.DefaultCellStyle.SelectionBackColor = Color.LightBlue
+        dgvTarefas.DefaultCellStyle.SelectionForeColor = Color.Black
+
     End Sub
 
     Private Sub btnSalvarTarefa_Click(sender As Object, e As EventArgs) Handles btnSalvarTarefa.Click
@@ -75,10 +78,40 @@ Public Class frmTarefas
                 Return
             End If
 
+            'Validação adicional para quantidade de caracteres
+            If txtTitulo.Text.Trim().Length < 3 Then
+
+                MessageBox.Show(
+                    "O título da tarefa deve possuir pelo menos 3 caracteres.",
+                    "Validação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                txtTitulo.Focus()
+
+                Return
+
+            End If
+
             If txtDescricao.Text.Trim() = "" Then
                 MessageBox.Show("Informe a descrição da tarefa.")
                 txtDescricao.Focus()
                 Return
+            End If
+
+            'Validação adicional para descrição da tarefa
+            If txtDescricao.Text.Trim().Length < 5 Then
+
+                MessageBox.Show(
+                    "A descrição da tarefa deve possuir pelo menos 5 caracteres.",
+                    "Validação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                txtDescricao.Focus()
+
+                Return
+
             End If
 
             If cmbStatus.SelectedIndex = -1 Then
@@ -103,7 +136,12 @@ Public Class frmTarefas
 
             tarefaService.CriarTarefa(tarefa)
 
-            MessageBox.Show("Tarefa criada com sucesso!")
+            MessageBox.Show(
+                "Tarefa criada com sucesso!",
+                "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
 
             LimparCampos()
 
@@ -111,7 +149,12 @@ Public Class frmTarefas
 
         Catch ex As Exception
 
-            MessageBox.Show("Erro ao salvar tarefa: " & ex.Message)
+            MessageBox.Show(
+                "Erro ao salvar tarefa: " & ex.Message,
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            )
 
         End Try
 
@@ -145,6 +188,19 @@ Public Class frmTarefas
             dgvTarefas.Columns("Status").Width = 120
             dgvTarefas.Columns("Prioridade").Width = 120
             dgvTarefas.Columns("DataCriacao").Width = 150
+
+            'Melhora de Ordenação
+            dgvTarefas.Columns("Titulo").SortMode =
+                DataGridViewColumnSortMode.Automatic
+
+            dgvTarefas.Columns("DataCriacao").SortMode =
+                DataGridViewColumnSortMode.Automatic
+
+            dgvTarefas.Columns("Status").SortMode =
+                DataGridViewColumnSortMode.NotSortable
+
+            dgvTarefas.Columns("Prioridade").SortMode =
+                DataGridViewColumnSortMode.NotSortable
 
             AtualizarContadores()
 
@@ -205,10 +261,30 @@ Public Class frmTarefas
         Dim andamento As Integer = listaCompleta.Where(Function(t) t.Status = "Em andamento").Count()
         Dim concluidas As Integer = listaCompleta.Where(Function(t) t.Status = "Concluída").Count()
 
+        'Adição da progress bar
+        Dim percentual As Integer = 0
+
+        If total > 0 Then
+            percentual = CInt((concluidas * 100) / total)
+        End If
+
         lblTotalTarefas.Text = "Total: " & total
         lblPendentes.Text = "Pendentes: " & pendentes
         lblEmAndamento.Text = "Em andamento: " & andamento
         lblConcluidas.Text = "Concluídas: " & concluidas
+
+        'Adequação para progress bar
+        lblPercentualConclusao.Text = "Progresso do Projeto: " & percentual & "%"
+
+        prgConclusao.Value = percentual
+
+        'Adequação para progress bar
+        If percentual = 100 Then
+
+            lblPercentualConclusao.Text =
+                "Projeto Concluído! (100%)"
+
+        End If
 
     End Sub
 
@@ -263,7 +339,12 @@ Public Class frmTarefas
 
             tarefaService.AtualizarTarefa(tarefa)
 
-            MessageBox.Show("Tarefa atualizada com sucesso!")
+            MessageBox.Show(
+                "Tarefa atualizada com sucesso!",
+                "Sucesso",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            )
 
             LimparCampos()
             CarregarTarefas()
@@ -293,7 +374,12 @@ Public Class frmTarefas
 
                 tarefaService.ExcluirTarefa(tarefaSelecionadaId)
 
-                MessageBox.Show("Tarefa excluída com sucesso!")
+                MessageBox.Show(
+                    "Tarefa excluída com sucesso!",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                )
 
                 LimparCampos()
                 CarregarTarefas()

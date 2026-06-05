@@ -47,6 +47,8 @@ Partial Class frmTarefas
         Me.cmbFiltroPrioridade = New System.Windows.Forms.ComboBox()
         Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.btnLimparFiltro = New System.Windows.Forms.Button()
+        Me.lblPercentualConclusao = New System.Windows.Forms.Label()
+        Me.prgConclusao = New System.Windows.Forms.ProgressBar()
         Me.grpCadastroTarefa.SuspendLayout()
         CType(Me.dgvTarefas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpTotalTarefas.SuspendLayout()
@@ -207,6 +209,8 @@ Partial Class frmTarefas
         '
         'grpTotalTarefas
         '
+        Me.grpTotalTarefas.Controls.Add(Me.prgConclusao)
+        Me.grpTotalTarefas.Controls.Add(Me.lblPercentualConclusao)
         Me.grpTotalTarefas.Controls.Add(Me.lblConcluidas)
         Me.grpTotalTarefas.Controls.Add(Me.lblEmAndamento)
         Me.grpTotalTarefas.Controls.Add(Me.lblPendentes)
@@ -305,6 +309,23 @@ Partial Class frmTarefas
         Me.btnLimparFiltro.Text = "Limpar"
         Me.btnLimparFiltro.UseVisualStyleBackColor = True
         '
+        'lblPercentualConclusao
+        '
+        Me.lblPercentualConclusao.AutoSize = True
+        Me.lblPercentualConclusao.Font = New System.Drawing.Font("Tahoma", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPercentualConclusao.Location = New System.Drawing.Point(8, 120)
+        Me.lblPercentualConclusao.Name = "lblPercentualConclusao"
+        Me.lblPercentualConclusao.Size = New System.Drawing.Size(201, 21)
+        Me.lblPercentualConclusao.TabIndex = 22
+        Me.lblPercentualConclusao.Text = "Progresso do Projeto: 0%"
+        '
+        'prgConclusao
+        '
+        Me.prgConclusao.Location = New System.Drawing.Point(214, 120)
+        Me.prgConclusao.Name = "prgConclusao"
+        Me.prgConclusao.Size = New System.Drawing.Size(261, 23)
+        Me.prgConclusao.TabIndex = 23
+        '
         'frmTarefas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
@@ -355,4 +376,6 @@ Partial Class frmTarefas
     Friend WithEvents cmbFiltroPrioridade As System.Windows.Forms.ComboBox
     Friend WithEvents btnFiltrar As System.Windows.Forms.Button
     Friend WithEvents btnLimparFiltro As System.Windows.Forms.Button
+    Friend WithEvents prgConclusao As System.Windows.Forms.ProgressBar
+    Friend WithEvents lblPercentualConclusao As System.Windows.Forms.Label
 End Class
