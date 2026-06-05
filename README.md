@@ -18,10 +18,13 @@ O sistema atualmente possui as seguintes funcionalidades:
 
 ## Gerenciamento de Projetos
 
+O sistema permite:
+
 * Criar novos projetos
 * Listar projetos cadastrados
 * Excluir projetos
-* Ao excluir um projeto, todas as tarefas associadas também são removidas
+* Exibir confirmação antes da exclusão
+* Remover automaticamente todas as tarefas associadas ao projeto excluído
 
 ---
 
@@ -32,12 +35,12 @@ Cada projeto pode possuir várias tarefas associadas.
 O sistema permite:
 
 * Criar tarefas
+* Editar tarefas existentes
+* Excluir tarefas individualmente
 * Associar tarefas a um projeto
 * Definir descrição da tarefa
-* Definir **status**
-* Definir **prioridade**
-* Editar uma tarefa já existente
-* Excluir tarefas individualmente
+* Definir status
+* Definir prioridade
 
 ---
 
@@ -57,32 +60,49 @@ O sistema permite localizar tarefas de forma rápida através de:
   * Média
   * Baixa
 
-Os filtros podem ser **combinados**, permitindo consultas mais específicas.
+Os filtros podem ser combinados para refinar os resultados.
 
-Também é possível **limpar os filtros** e retornar à listagem completa.
+Também é possível limpar os filtros e retornar à listagem completa.
 
 ---
 
-## Status das tarefas
+## Dashboard do Projeto
 
-As tarefas podem possuir três status:
+O sistema possui um dashboard simples para acompanhamento do andamento do projeto.
 
-* **Pendente**
-* **Em andamento**
-* **Concluída**
-
-O sistema exibe contadores automáticos de tarefas:
+São exibidos:
 
 * Total de tarefas
 * Tarefas pendentes
 * Tarefas em andamento
 * Tarefas concluídas
+* Percentual de conclusão do projeto
+* Barra de progresso visual
 
-Os contadores representam o **estado geral do projeto**, independentemente dos filtros aplicados.
+O dashboard é atualizado automaticamente conforme as tarefas são alteradas.
 
 ---
 
-## Identificação visual por prioridade
+## Status das Tarefas
+
+As tarefas podem possuir três status:
+
+* Pendente
+* Em andamento
+* Concluída
+
+O sistema exibe contadores automáticos de tarefas:
+
+* Total de tarefas
+* Pendentes
+* Em andamento
+* Concluídas
+
+Os contadores representam o estado geral do projeto independentemente dos filtros aplicados.
+
+---
+
+## Identificação Visual por Prioridade
 
 As tarefas são destacadas por cores para facilitar a visualização:
 
@@ -95,21 +115,93 @@ As tarefas são destacadas por cores para facilitar a visualização:
 
 ---
 
-## Ordenação automática de tarefas
+## Ordenação Inteligente de Tarefas
 
-As tarefas são organizadas automaticamente na tabela seguindo a seguinte prioridade:
+As tarefas são organizadas automaticamente seguindo a seguinte prioridade:
 
-1. Tarefas de prioridade **Alta**
-2. Tarefas de prioridade **Média**
-3. Tarefas de prioridade **Baixa**
-4. Tarefas com status **Concluída** (sempre exibidas por último)
+1. Prioridade Alta
+2. Prioridade Média
+3. Prioridade Baixa
+4. Tarefas concluídas
 
-Isso permite visualizar rapidamente as tarefas mais importantes.
+Esse comportamento facilita a identificação das atividades mais importantes.
 
+---
+
+## Validações
+
+O sistema possui validações para garantir a consistência dos dados:
+
+### Projetos
+
+* Nome obrigatório
+* Nome com no mínimo 3 caracteres
+* Descrição com no mínimo 5 caracteres
+
+### Tarefas
+
+* Título obrigatório
+* Título com no mínimo 3 caracteres
+* Descrição obrigatória
+* Descrição com no mínimo 5 caracteres
+* Status obrigatório
+* Prioridade obrigatória
+
+---
+
+## Melhorias de Experiência do Usuário (UX)
+
+Foram implementadas melhorias de usabilidade, incluindo:
+
+* Mensagens de sucesso padronizadas
+* Mensagens de erro padronizadas
+* Confirmações de exclusão
+* Destaque visual da tarefa selecionada
+* Navegação simplificada entre telas
+* Indicadores visuais de progresso do projeto
 
 # Arquitetura do Projeto
 
 O sistema foi desenvolvido utilizando **arquitetura em camadas**, separando responsabilidades entre:
+
+# Diagramas UML
+
+Como parte da documentação do sistema, foram desenvolvidos os seguintes diagramas:
+
+## Diagrama de Classes
+
+Representa a arquitetura em camadas do sistema e os relacionamentos entre entidades, serviços, repositórios e interface gráfica.
+
+Principais elementos:
+
+* Projeto
+* Tarefa
+* ProjetoService
+* TarefaService
+* ProjetoRepository
+* TarefaRepository
+* DbConnectionFactory
+* frmProjetos
+* frmTarefas
+
+## Diagrama de Caso de Uso
+
+Representa as funcionalidades disponíveis para o usuário do sistema.
+
+Principais casos de uso:
+
+* Criar Projeto
+* Listar Projetos
+* Excluir Projeto
+* Criar Tarefa
+* Editar Tarefa
+* Excluir Tarefa
+* Buscar Tarefa
+* Filtrar por Status
+* Filtrar por Prioridade
+* Visualizar Dashboard
+* Visualizar Progresso do Projeto
+
 
 ### Domain
 
@@ -224,10 +316,27 @@ Marcelo Vinícius Ferreira Sousa
 
 ---
 
-# Contexto acadêmico
+# Contexto Acadêmico
 
-Projeto desenvolvido como atividade de **metodologia ágil com entregas em sprint**, incluindo:
+Projeto desenvolvido como atividade prática da disciplina de Software Product, utilizando desenvolvimento incremental através de sprints.
 
-* código fonte versionado no GitHub
-* board de funcionalidades
-* vídeo de demonstração da sprint
+Durante as entregas foram aplicados conceitos de:
+
+* Planejamento de Sprint
+* Gestão de Backlog
+* Organização de Board de Desenvolvimento
+* Controle de Versão com Git e GitHub
+* Desenvolvimento em Camadas
+* Banco de Dados Relacional
+* Interface Gráfica Desktop
+* Modelagem UML
+
+Os artefatos produzidos incluem:
+
+* Código fonte versionado no GitHub
+* Board de acompanhamento das funcionalidades
+* Vídeos demonstrando cada sprint
+* Diagrama de Classes
+* Diagrama de Caso de Uso
+* Documentação técnica do projeto
+
